@@ -14,9 +14,9 @@ sudo ./install-service.sh --on-threshold 60 --off-threshold 50 --delay 2
 
 echo 'Setting up standalone python script'
 mkdir -p ~/.local/bin
-cp /tmp/fanshim-python/examples/automatic.py ~/.local/bin/fanshim.py
+cp /tmp/fanshim-python/examples/automatic.py ~/.local/bin/fanshim-service.py
 sudo sed -i '/WorkingDirectory/d' /etc/systemd/system/pimoroni-fanshim.service
-sudo sed -i 's/python3 .*\/automatic\.py/python3 ~\/\.local\/bin\/fanshim\.py/' /etc/systemd/system/pimoroni-fanshim.service
+sudo sed -i "s|python3 .*\/automatic\.py|python3 $HOME\/\.local\/bin\/fanshim-service\.py|" /etc/systemd/system/pimoroni-fanshim.service
 
 echo 'Cleaning'
 sudo rm -rf /tmp/fanshim-python
